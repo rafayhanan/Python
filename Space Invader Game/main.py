@@ -20,7 +20,7 @@ background = pygame.image.load('background.png')
 
 # Sound
 mixer.music.load("background.wav")
-#mixer.music.play()
+mixer.music.play()
 
 
 
@@ -153,9 +153,9 @@ while running:
                 alien_y[j] = 2000
               
             game_over_text()
-            '''sleep(5)
-            pygame.quit()
-            sys.exit()'''
+            #sleep(5)
+            #pygame.quit()
+            #sys.exit()
 
             
 
