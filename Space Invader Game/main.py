@@ -1,3 +1,6 @@
+#THIS PROJECT WAS CREATED WITHOUT USING ANY CLASSES/OOP DELIBERATELY#
+ 
+
 import math
 import random
 import pygame
@@ -85,13 +88,13 @@ def display_alien(x, y, i):
     screen.blit(alien[i], (x, y))
 
 
-def fire_goli(x, y):
-    global missile_state
+def fire_bullet(x, y):
+    global missile_state  #if missile state is 'fire', you are allowed to shoot. added to avoid spamming
     missile_state = "fire"
     screen.blit(missile, (x + 16, y + 10))
 
 
-def Takkar(enemyX, enemyY, bulletX, bulletY):
+def checkCollision(enemyX, enemyY, bulletX, bulletY):
     distance = math.sqrt(math.pow(enemyX - bulletX, 2) + (math.pow(enemyY - bulletY, 2)))
     if distance < 27:
         return True
@@ -130,7 +133,7 @@ while running:
                     bulletSound.play()
                     
                     missile_x = spaceship_x
-                    fire_goli(missile_x, missile_y)
+                    fire_bullet(missile_x, missile_y)
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_a or event.key == pygame.K_d:
@@ -170,7 +173,7 @@ while running:
         
 
         # Collision
-        collision = Takkar(alien_x[i], alien_y[i], missile_x, missile_y)
+        collision = checkCollision(alien_x[i], alien_y[i], missile_x, missile_y)
         if collision:
             explosionSound = mixer.Sound("explosion.wav")
             explosionSound.play()
@@ -230,7 +233,7 @@ while running:
         missile_state = "ready"
 
     if missile_state == "fire":
-        fire_goli(missile_x, missile_y)
+        fire_bullet(missile_x, missile_y)
         missile_y -= missile_y_change
 
     main()
